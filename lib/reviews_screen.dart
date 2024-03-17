@@ -3,11 +3,16 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:rate_app/rating_bottom_sheet.dart';
 
 
-class ReviewsScreens extends StatelessWidget {
+class ReviewsScreens extends StatefulWidget {
   const ReviewsScreens({super.key});
 
-  final double rating = 4.3;
+  @override
+  State<ReviewsScreens> createState() => _ReviewsScreensState();
+}
 
+class _ReviewsScreensState extends State<ReviewsScreens> {
+  final double rating = 4.3;
+  bool isHelpFull = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,12 +134,38 @@ class ReviewsScreens extends StatelessWidget {
                               ),
                             ],
                           ),
+
                         ],
                       ),
-                      subtitle: const Padding(
-                        padding: EdgeInsets.only(top: 14),
-                        child: Text(
-                            "Sleek design adds elegance to any room while smart features ensure seamless access to favorite content. Immersive sound enhances the overall entertainment experience, making it a top choice for home viewing."),
+                      subtitle: Padding(
+                        padding: const EdgeInsets.only(top: 14),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                                "Sleek design adds elegance to any room while smart features ensure seamless access to favorite content. Immersive sound enhances the overall entertainment experience, making it a top choice for home viewing."),
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            InkWell(
+                              borderRadius: BorderRadius.circular(10),
+                              onTap: (){
+                                setState(() {
+                                  isHelpFull = !isHelpFull;
+                                });
+                              },
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(isHelpFull ? Icons.thumb_up: Icons.thumb_up_outlined,color: isHelpFull ? Colors.blue : Colors.black87,),
+                                  const SizedBox(
+                                    width: 8,
+                                  ),
+                                  Text("Helpful",style: TextStyle(color: isHelpFull ? Colors.blue : Colors.black87),),
+                                ],),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

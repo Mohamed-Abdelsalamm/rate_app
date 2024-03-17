@@ -2,8 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:rate_app/reviews_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  bool isHelpFull = false;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +34,7 @@ class HomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 15,),
             SizedBox(
-              height: MediaQuery.sizeOf(context).height * 0.2,
+              height: MediaQuery.sizeOf(context).height * 0.22,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) => Container(
@@ -75,6 +83,26 @@ class HomeScreen extends StatelessWidget {
                                     fontSize: 12),
                               ),
                             ],
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          InkWell(
+                            borderRadius: BorderRadius.circular(10),
+                            onTap: (){
+                              setState(() {
+                              isHelpFull = !isHelpFull;
+                              });
+                            },
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                              Icon(isHelpFull ? Icons.thumb_up: Icons.thumb_up_outlined,color: isHelpFull ? Colors.blue : Colors.black87,),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              Text("Helpful",style: TextStyle(color: isHelpFull ? Colors.blue : Colors.black87),),
+                            ],),
                           ),
                         ],
                       ),
